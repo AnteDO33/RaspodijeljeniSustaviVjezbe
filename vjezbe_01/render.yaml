@@ -5,7 +5,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    rootDir: backend
+    rootDir: vjezbe_01/backend
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
