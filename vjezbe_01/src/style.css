@@ -1,5 +1,12 @@
 
+/* ========================================
+   TASKFLOW - MAIN STYLESHEET
+   Vue 3 + Vite + Express REST API
+======================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ===== GLOBALNE POSTAVKE ===== */
 
 :root {
   font-family: 'DM Sans', Arial, sans-serif;
@@ -10,23 +17,48 @@
   -webkit-font-smoothing: antialiased;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-body { margin: 0; }
+body {
+  margin: 0;
+  min-width: 320px;
+}
 
-button, input { font: inherit; }
+button,
+input {
+  font: inherit;
+}
 
-button { cursor: pointer; }
-button:disabled { opacity: .5; cursor: not-allowed; }
-button:focus-visible, input:focus-visible {
+button {
+  cursor: pointer;
+  transition: background 0.2s ease,
+              color 0.2s ease,
+              opacity 0.2s ease,
+              border-color 0.2s ease;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible {
   outline: 2px solid #a78bfa;
   outline-offset: 3px;
 }
 
+/* ===== GLAVNA STRUKTURA ===== */
+
 .app-shell {
   min-height: 100vh;
   display: flex;
+  background: #0c0d14;
 }
+
+/* ===== SIDEBAR ===== */
 
 .sidebar {
   width: 252px;
@@ -56,24 +88,29 @@ button:focus-visible, input:focus-visible {
   background: #7c5cf6;
   border-radius: 11px;
   font-size: 22px;
+  color: #fff;
 }
 
-.brand-dot, .title-star { color: #a78bfa; }
+.brand-dot {
+  color: #a78bfa;
+}
 
-.sidebar-section { margin-top: 55px; }
-.sidebar-label, .eyebrow {
+.sidebar-section {
+  margin-top: 55px;
+}
+
+.sidebar-label {
+  margin-left: 15px;
   color: #77798c;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.5px;
 }
 
-.sidebar-label { margin-left: 15px; }
-
 .nav-item {
   display: block;
   width: 100%;
-  border: 0;
+  border: 1px solid transparent;
   text-align: left;
   background: transparent;
   color: #aaaabd;
@@ -82,31 +119,64 @@ button:focus-visible, input:focus-visible {
   border-radius: 10px;
   font-weight: 700;
 }
-.nav-item span { margin-right: 12px; font-size: 18px; }
-.nav-item.active { background: #242039; color: #c4b5fd; }
 
-.sidebar-bottom { margin-top: auto; }
+.nav-item span {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+.nav-item.active {
+  background: #242039;
+  color: #c4b5fd;
+}
+
+.nav-item:hover {
+  background: #29233e;
+}
+
+/* ===== SIDEBAR DONJI DIO ===== */
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
 .tip-card {
   padding: 20px;
   background: #1c1b2b;
   border: 1px solid #302b49;
   border-radius: 16px;
 }
-.tip-icon { color: #b7a2ff; font-size: 25px; margin-bottom: 16px; }
-.tip-card strong { font-size: 14px; }
+
+.tip-icon {
+  color: #b7a2ff;
+  font-size: 25px;
+  margin-bottom: 16px;
+}
+
+.tip-card strong {
+  font-size: 14px;
+}
+
 .tip-card p {
   margin-bottom: 0;
   font-size: 12px;
   line-height: 1.7;
   color: #9594ae;
 }
+
 .sidebar-footer {
   padding: 20px 5px 0;
   color: #686a7e;
   font-size: 11px;
 }
 
-.main-content { flex: 1; min-width: 0; }
+/* ===== GLAVNI SADRŽAJ ===== */
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .topbar {
   height: 76px;
   padding: 0 52px;
@@ -115,10 +185,25 @@ button:focus-visible, input:focus-visible {
   align-items: center;
   justify-content: space-between;
 }
-.breadcrumb, .today-label { color: #85869b; font-size: 13px; }
-.breadcrumb span { margin: 0 10px; color: #48495b; }
 
-.content { max-width: 1100px; padding: 46px 52px; margin: auto; }
+.breadcrumb,
+.today-label {
+  color: #85869b;
+  font-size: 13px;
+}
+
+.breadcrumb span {
+  margin: 0 10px;
+  color: #48495b;
+}
+
+.content {
+  max-width: 1100px;
+  padding: 46px 52px;
+  margin: auto;
+}
+
+/* ===== WELCOME SECTION ===== */
 
 .welcome {
   display: flex;
@@ -126,8 +211,30 @@ button:focus-visible, input:focus-visible {
   justify-content: space-between;
   margin-bottom: 34px;
 }
-h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
-.welcome p, .section-heading p { color: #9293a8; margin: 0; font-size: 14px; }
+
+.eyebrow {
+  color: #77798c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+h1 {
+  font-size: 38px;
+  letter-spacing: -1.6px;
+  margin: 12px 0 8px;
+}
+
+.title-star {
+  color: #a78bfa;
+}
+
+.welcome p {
+  color: #9293a8;
+  margin: 0;
+  font-size: 14px;
+}
+
 .welcome-icon {
   width: 68px;
   height: 68px;
@@ -139,41 +246,81 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   font-size: 36px;
 }
 
+/* ===== STATISTIČKE KARTICE ===== */
+
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 20px;
 }
-.stat-card, .progress-card {
-  background: #161821;
-  border: 1px solid #292a39;
-  border-radius: 16px;
-}
+
 .stat-card {
   min-height: 160px;
   padding: 23px;
   display: flex;
   flex-direction: column;
+  background: #161821;
+  border: 1px solid #292a39;
+  border-radius: 16px;
+  transition: border-color 0.2s ease,
+              transform 0.2s ease;
 }
-.stat-label { color: #a1a2b5; font-size: 13px; }
+
+.stat-card:hover {
+  border-color: #51416f;
+  transform: translateY(-2px);
+}
+
+.stat-label {
+  color: #a1a2b5;
+  font-size: 13px;
+}
+
 .stat-card strong {
   margin: 12px 0;
   font-size: 37px;
   letter-spacing: -1px;
 }
-.stat-bottom { color: #77798f; font-size: 12px; }
 
-.progress-card { padding: 23px 25px; margin-bottom: 45px; }
+.stat-bottom {
+  color: #77798f;
+  font-size: 12px;
+}
+
+/* ===== PROGRESS BAR ===== */
+
+.progress-card {
+  background: #161821;
+  border: 1px solid #292a39;
+  border-radius: 16px;
+  padding: 23px 25px;
+  margin-bottom: 45px;
+}
+
 .progress-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
-.progress-heading h3 { margin: 0 0 5px; font-size: 15px; }
-.progress-heading p { margin: 0; color: #898ba0; font-size: 12px; }
-.progress-heading strong { color: #b5a1ff; font-size: 24px; }
+
+.progress-heading h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+
+.progress-heading p {
+  margin: 0;
+  color: #898ba0;
+  font-size: 12px;
+}
+
+.progress-heading strong {
+  color: #b5a1ff;
+  font-size: 24px;
+}
+
 .progress-track {
   width: 100%;
   height: 9px;
@@ -181,12 +328,64 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   border-radius: 20px;
   overflow: hidden;
 }
+
 .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #7755f0, #bb9dff);
   border-radius: 20px;
-  transition: width .3s ease;
+  transition: width 0.3s ease;
 }
+
+/* ===== REST API STATUS PORUKE ===== */
+
+.api-message,
+.api-error {
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: 1px solid transparent;
+}
+
+/* Poruka tijekom učitavanja */
+
+.api-message {
+  background: #242039;
+  color: #c4b5fd;
+  border-color: #40355e;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Poruka kada REST API nije dostupan */
+
+.api-error {
+  background: #3b2028;
+  color: #fecaca;
+  border-color: #703b4b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+.api-error button {
+  flex-shrink: 0;
+  background: transparent;
+  color: #fecaca;
+  border: 1px solid #b96777;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.api-error button:hover {
+  background: #62313e;
+}
+
+/* ===== TASKS SECTION ===== */
 
 .section-heading {
   display: flex;
@@ -194,7 +393,19 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   align-items: center;
   margin-bottom: 23px;
 }
-.section-heading h2 { margin: 0 0 6px; font-size: 22px; letter-spacing: -.6px; }
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  letter-spacing: -0.6px;
+}
+
+.section-heading p {
+  color: #9293a8;
+  margin: 0;
+  font-size: 14px;
+}
+
 .task-count {
   border: 1px solid #383349;
   color: #b3a4e9;
@@ -202,7 +413,10 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   padding: 7px 12px;
   border-radius: 30px;
   font-size: 12px;
+  white-space: nowrap;
 }
+
+/* ===== DODAVANJE ZADATKA ===== */
 
 .add-form {
   background: #191b26;
@@ -212,8 +426,18 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   align-items: center;
   padding: 8px 9px 8px 18px;
   gap: 12px;
+  transition: border-color 0.2s ease;
 }
-.add-plus { font-size: 24px; color: #a78bfa; }
+
+.add-form:focus-within {
+  border-color: #805ff2;
+}
+
+.add-plus {
+  font-size: 24px;
+  color: #a78bfa;
+}
+
 .add-form input {
   flex: 1;
   min-width: 0;
@@ -224,7 +448,11 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   padding: 13px 0;
   font-size: 14px;
 }
-.add-form input::placeholder { color: #727388; }
+
+.add-form input::placeholder {
+  color: #727388;
+}
+
 .primary-btn {
   border: 0;
   padding: 13px 18px;
@@ -233,8 +461,14 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   border-radius: 9px;
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
 }
-.primary-btn:not(:disabled):hover { background: #997aff; }
+
+.primary-btn:not(:disabled):hover {
+  background: #997aff;
+}
+
+/* ===== FILTERI ===== */
 
 .task-toolbar {
   display: flex;
@@ -245,7 +479,13 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   margin-top: 23px;
   margin-bottom: 15px;
 }
-.filters { display: flex; gap: 7px; flex-wrap: wrap; }
+
+.filters {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
 .filter-btn {
   background: transparent;
   border: 1px solid transparent;
@@ -255,20 +495,37 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   padding: 10px 14px;
   border-radius: 9px;
 }
+
+.filter-btn:hover {
+  background: #201e2d;
+  color: #c5b5ff;
+}
+
 .filter-btn.selected {
   color: #c5b5ff;
   background: #29223e;
   border-color: #493768;
 }
+
 .clear-btn {
   border: 0;
   color: #9994ae;
   background: transparent;
   font-size: 12px;
 }
-.clear-btn:hover { color: #fca5a5; }
 
-.task-list { display: flex; flex-direction: column; gap: 10px; }
+.clear-btn:not(:disabled):hover {
+  color: #fca5a5;
+}
+
+/* ===== POPIS ZADATAKA ===== */
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .task-item {
   background: #171923;
   border: 1px solid #2b2c3c;
@@ -278,8 +535,16 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   align-items: center;
   gap: 15px;
   min-height: 68px;
+  transition: border-color 0.2s ease,
+              background 0.2s ease;
+  animation: fadeIn 0.2s ease;
 }
-.task-item:hover { border-color: #56466e; }
+
+.task-item:hover {
+  border-color: #56466e;
+  background: #1b1c29;
+}
+
 .task-checkbox {
   width: 20px;
   height: 20px;
@@ -287,16 +552,32 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   cursor: pointer;
   flex-shrink: 0;
 }
+
+.task-checkbox:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .task-text {
   flex: 1;
   overflow-wrap: anywhere;
   font-size: 14px;
+  line-height: 1.5;
 }
+
 .task-item.done .task-text {
   text-decoration: line-through;
   color: #737588;
 }
-.task-actions { display: flex; gap: 7px; }
+
+/* ===== GUMBI ZA UREĐIVANJE I BRISANJE ===== */
+
+.task-actions {
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
 .icon-btn {
   border: 0;
   background: #252535;
@@ -304,9 +585,21 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   width: 34px;
   height: 34px;
   border-radius: 8px;
+  display: grid;
+  place-items: center;
 }
-.icon-btn:hover { color: #fff; background: #39354c; }
-.delete-btn:hover { color: #fca5a5; background: #452932; }
+
+.icon-btn:not(:disabled):hover {
+  color: #fff;
+  background: #39354c;
+}
+
+.delete-btn:not(:disabled):hover {
+  color: #fca5a5;
+  background: #452932;
+}
+
+/* ===== UREĐIVANJE ZADATKA ===== */
 
 .edit-form {
   width: 100%;
@@ -314,6 +607,7 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   gap: 9px;
   flex-wrap: wrap;
 }
+
 .edit-form input {
   flex: 1;
   min-width: 140px;
@@ -323,60 +617,229 @@ h1 { font-size: 38px; letter-spacing: -1.6px; margin: 12px 0 8px; }
   color: white;
   padding: 10px;
 }
-.save-btn, .cancel-btn {
+
+.edit-form input:focus {
+  border-color: #a78bfa;
+}
+
+.save-btn,
+.cancel-btn {
   border: 0;
   border-radius: 7px;
   padding: 10px 13px;
   color: white;
+  font-weight: 600;
+  font-size: 12px;
 }
-.save-btn { background: #7659e9; }
-.cancel-btn { background: #353647; }
+
+.save-btn {
+  background: #7659e9;
+}
+
+.save-btn:not(:disabled):hover {
+  background: #9278fa;
+}
+
+.cancel-btn {
+  background: #353647;
+}
+
+.cancel-btn:hover {
+  background: #4a4b5f;
+}
+
+/* ===== PRAZNA LISTA ===== */
 
 .empty-state {
   text-align: center;
   padding: 60px 20px;
   border: 1px dashed #39394b;
   border-radius: 15px;
+  animation: fadeIn 0.3s ease;
 }
-.empty-icon { font-size: 44px; color: #a58afc; }
-.empty-state h3 { font-size: 18px; }
-.empty-state p { color: #898ba0; font-size: 13px; }
+
+.empty-icon {
+  font-size: 44px;
+  color: #a58afc;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  margin: 15px 0 10px;
+}
+
+.empty-state p {
+  color: #898ba0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
 
 .main-footer {
   text-align: center;
   margin-top: 65px;
   color: #6e7086;
   font-size: 11px;
+  line-height: 1.6;
 }
+
+/* ===== ANIMACIJE ===== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== TABLET ===== */
 
 @media (max-width: 900px) {
-  .sidebar { width: 195px; }
-  .content { padding: 35px 25px; }
-  .topbar { padding: 0 25px; }
+
+  .sidebar {
+    width: 195px;
+  }
+
+  .content {
+    padding: 35px 25px;
+  }
+
+  .topbar {
+    padding: 0 25px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
 }
 
+/* ===== MOBITEL ===== */
+
 @media (max-width: 650px) {
-  .app-shell { flex-direction: column; }
+
+  .app-shell {
+    flex-direction: column;
+  }
+
   .sidebar {
     width: 100%;
     padding: 14px 20px;
     border-right: 0;
     border-bottom: 1px solid #292a39;
   }
-  .brand { font-size: 20px; }
-  .sidebar-section, .sidebar-bottom { display: none; }
-  .topbar { height: 55px; padding: 0 18px; }
-  .today-label { display: none; }
-  .content { padding: 28px 16px; }
-  h1 { font-size: 31px; }
-  .welcome-icon { display: none; }
-  .stats-grid { gap: 8px; }
-  .stat-card { padding: 15px 11px; min-height: 125px; }
-  .stat-label { font-size: 10px; }
-  .stat-card strong { font-size: 29px; }
-  .stat-bottom { font-size: 10px; }
-  .add-form { flex-wrap: wrap; }
-  .primary-btn { width: 100%; }
-  .task-item { padding: 12px; }
-  .task-text { font-size: 13px; }
+
+  .brand {
+    font-size: 20px;
+  }
+
+  .sidebar-section,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .topbar {
+    height: 55px;
+    padding: 0 18px;
+  }
+
+  .today-label {
+    display: none;
+  }
+
+  .content {
+    padding: 28px 16px;
+  }
+
+  h1 {
+    font-size: 31px;
+  }
+
+  .welcome-icon {
+    display: none;
+  }
+
+  .stats-grid {
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 15px 11px;
+    min-height: 125px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .stat-card strong {
+    font-size: 29px;
+  }
+
+  .stat-bottom {
+    font-size: 10px;
+  }
+
+  .progress-card {
+    padding: 18px;
+    margin-bottom: 32px;
+  }
+
+  .section-heading h2 {
+    font-size: 20px;
+  }
+
+  .add-form {
+    flex-wrap: wrap;
+  }
+
+  .primary-btn {
+    width: 100%;
+  }
+
+  .task-item {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .task-text {
+    font-size: 13px;
+  }
+
+  .task-toolbar {
+    align-items: flex-start;
+  }
+
+  .api-error {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .api-error button {
+    width: 100%;
+  }
+
+  .main-footer {
+    margin-top: 45px;
+  }
+
+}
+
+/* ===== PRISTUPAČNOST ===== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
 }

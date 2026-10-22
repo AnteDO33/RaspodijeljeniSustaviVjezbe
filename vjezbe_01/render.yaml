@@ -1,0 +1,11 @@
+
+services:
+  - type: web
+    name: taskflow-api
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
