@@ -1,7 +1,17 @@
 
+/* ==========================================
+   TASKFLOW - REST API SERVICE
+   Vue 3 + Express.js + Render.com
+========================================== */
+
+// ===== API ADRESA =====
+
 const API_URL = (
-  import.meta.env.VITE_API_URL || 'http://localhost:3000'
-).replace(/\/$/, '')
+  import.meta.env.VITE_API_URL ||
+  'https://raspodijeljenisustavivjezb.onrender.com'
+).replace(/\/+$/, '')
+
+// ===== HTTP REQUEST FUNKCIJA =====
 
 async function request(path, options = {}) {
   let response
@@ -10,39 +20,73 @@ async function request(path, options = {}) {
     response = await fetch(`${API_URL}${path}`, {
       ...options,
       headers: {
-        'Content-Type': 'application/json',
+        ...(options.body !== undefined
+          ? { 'Content-Type': 'application/json' }
+          : {}),
         ...options.headers
       }
     })
-  } catch {
-    throw new Error('Nije moguće povezati se s API poslužiteljem.')
+  } catch (error) {
+    console.error('Greška povezivanja s REST API-jem:', error)
+
+    throw new Error(
+      'Nije moguće povezati se s Render API poslužiteljem.'
+    )
   }
 
+  // Provjera HTTP statusa
   if (!response.ok) {
     const error = await response.json().catch(() => ({}))
-    throw new Error(error.error || `HTTP greška: ${response.status}`)
+
+    throw new Error(
+      error.error || `HTTP greška: ${response.status}`
+    )
   }
 
-  return response.status === 204 ? null : response.json()
+  // DELETE vraća 204 No Content
+  if (response.status === 204) {
+    return null
+  }
+
+  // Vraćanje JSON odgovora
+  return response.json()
 }
 
-export const taskApi = {
-  getAll: () => request('/api/tasks'),
+// ===== TASKFLOW REST API ENDPOINTOVI =====
 
-  create: text =>
-    request('/api/tasks', {
+export const taskApi = {
+
+  // GET - Dohvati sve zadatke
+  getAll: () => {
+    return request('/api/tasks')
+  },
+
+  // POST - Dodaj novi zadatak
+  create: (text) => {
+    return request('/api/tasks', {
       method: 'POST',
       body: JSON.stringify({ text })
-    }),
-
-  update: (id, data) =>
-    request(`/api/tasks/${encodeURIComponent(id)}`, {
-      method: 'PATCH',
-      body: JSON.stringify(data)
-    }),
-
-  remove: id =>
-    request(`/api/tasks/${encodeURIComponent(id)}`, {
-      method: 'DELETE'
     })
+  },
+
+  // PATCH - Ažuriraj postojeći zadatak
+  update: (id, data) => {
+    return request(
+      `/api/tasks/${encodeURIComponent(id)}`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify(data)
+      }
+    )
+  },
+
+  // DELETE - Izbriši zadatak
+  remove: (id) => {
+    return request(
+      `/api/tasks/${encodeURIComponent(id)}`,
+      {
+        method: 'DELETE'
+      }
+    )
+  }
 }
