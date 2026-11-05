@@ -1,0 +1,50 @@
+{
+    "predlosci": [
+        {
+            "id": 1,
+            "naziv": "Nauciti Python",
+            "prioritet": "Visok"
+        },
+        {
+            "id": 2,
+            "naziv": "Napraviti projekt",
+            "prioritet": "Srednji"
+        },
+        {
+            "id": 3,
+            "naziv": "Procitati knjigu",
+            "prioritet": "Nizak"
+        }
+    ],
+    "kategorije": [
+        {
+            "id": 1,
+            "naziv": "Fakultet",
+            "boja": "plava"
+        },
+        {
+            "id": 2,
+            "naziv": "Posao",
+            "boja": "crvena"
+        },
+        {
+            "id": 3,
+            "naziv": "Osobno",
+            "boja": "zelena"
+        }
+    ],
+    "savjeti": [
+        {
+            "id": 1,
+            "tekst": "Prvo rijesi najvaznije zadatke."
+        },
+        {
+            "id": 2,
+            "tekst": "Velike zadatke podijeli na manje."
+        },
+        {
+            "id": 3,
+            "tekst": "Redovito pregledavaj svoj popis."
+        }
+    ]
+}

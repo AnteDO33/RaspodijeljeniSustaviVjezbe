@@ -2,6 +2,8 @@
 import asyncio
 import random
 import time
+import json
+from pathlib import Path
 from pprint import pprint
 
 
@@ -54,14 +56,12 @@ async def dohvati_savjete(vrijeme_cekanja):
 
 
 # Glavna funkcija
-async def main():
-    random.seed(42)
 
-    vremena = {
-        "predlosci": random.uniform(1, 3),
-        "kategorije": random.uniform(1, 3),
-        "savjeti": random.uniform(1, 3)
-    }
+# ZADATAK 2 - Sekvencijalno izvodenje
+async def sekvencijalno(vremena):
+    print("\n--- SEKVENCIJALNO IZVODENJE ---")
+
+    t1 = time.perf_counter()
 
     predlosci = await dohvati_predloske_zadataka(
         vremena["predlosci"]
@@ -81,15 +81,97 @@ async def main():
         "savjeti": savjeti
     }
 
-    print("\nPripremljeni podaci:")
-    pprint(podaci, sort_dicts=False)
+    t2 = time.perf_counter()
+
+    print(f"Sekvencijalno vrijeme: {t2 - t1:.2f} sekundi")
+
+    return podaci, t2 - t1
+
+
+# ZADATAK 2 - Konkurentno izvodenje
+async def konkurentno(vremena):
+    print("\n--- KONKURENTNO IZVODENJE ---")
+
+    t1 = time.perf_counter()
+
+    predlosci, kategorije, savjeti = await asyncio.gather(
+        dohvati_predloske_zadataka(vremena["predlosci"]),
+        dohvati_kategorije(vremena["kategorije"]),
+        dohvati_savjete(vremena["savjeti"])
+    )
+
+    podaci = {
+        "predlosci": predlosci,
+        "kategorije": kategorije,
+        "savjeti": savjeti
+    }
+
+    t2 = time.perf_counter()
+
+    print(f"Konkurentno vrijeme: {t2 - t1:.2f} sekundi")
+
+    return podaci, t2 - t1
+
+
+# ZADATAK 2 - Test redoslijeda asyncio.gather()
+async def test_gather(vremena):
+    print("\n--- TEST REDOSLIJEDA GATHER ---")
+
+    rezultati = await asyncio.gather(
+        dohvati_savjete(vremena["savjeti"]),
+        dohvati_predloske_zadataka(vremena["predlosci"]),
+        dohvati_kategorije(vremena["kategorije"])
+    )
+
+    print("\nRedoslijed vracenih rezultata:")
+    print("1. Savjeti:", rezultati[0])
+    print("2. Predlosci:", rezultati[1])
+    print("3. Kategorije:", rezultati[2])
+
+
+# Glavna funkcija
+async def main():
+    random.seed(42)
+
+    vremena = {
+        "predlosci": random.uniform(1, 3),
+        "kategorije": random.uniform(1, 3),
+        "savjeti": random.uniform(1, 3)
+    }
+
+    print("--- VREMENA CEKANJA ---")
+    for naziv, vrijeme in vremena.items():
+        print(f"{naziv}: {vrijeme:.2f} sekundi")
+
+    # Sekvencijalna obrada
+    podaci_sek, vrijeme_sek = await sekvencijalno(vremena)
+
+    # Konkurentna obrada
+    podaci_kon, vrijeme_kon = await konkurentno(vremena)
+
+    # Usporedba
+    print("\n--- USPOREDBA ---")
+    print(f"Sekvencijalno: {vrijeme_sek:.2f} sekundi")
+    print(f"Konkurentno: {vrijeme_kon:.2f} sekundi")
+    print(f"Ubrzanje: {vrijeme_sek / vrijeme_kon:.2f}x")
+
+    print("Rezultati jednaki:", podaci_sek == podaci_kon)
+
+    # Objedinjeni podaci
+    print("\n--- PRIPREMLJENI PODACI ---")
+    pprint(podaci_kon, sort_dicts=False)
+
+    #Zadatak 3 - Spremanje podataka u JSON datoteku
+    putanja = Path(__file__).parent / "podaci.json"
+
+    with open(putanja, "w", encoding="utf-8") as datoteka:
+        json.dump(podaci_kon, datoteka, ensure_ascii=False, indent=4)
+
+    print(f"\nPodaci su spremljeni u datoteku: {putanja}")
+
+    # Test redoslijeda
+    await test_gather(vremena)
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-t1 = time.perf_counter()
-results = asyncio.run(main())
-t2 = time.perf_counter()
-
-print(f"\nVrijeme izvrsavanja: {t2 - t1:.2f} sekundi")
